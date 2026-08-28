@@ -996,6 +996,51 @@ body {
   border: 1px solid rgba(192,57,43,0.3);
 }
 
+/* ── Players Card ── */
+.players-card {
+  background: var(--surface);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.players-card h3 {
+  font-size: 14px;
+  color: var(--gold);
+  margin: 0 0 14px;
+  letter-spacing: 0.08em;
+}
+
+.players-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.player-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  border-left: 3px solid var(--gold);
+}
+
+.player-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.05em;
+}
+
+.player-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
 /* ── Footer ── */
 .site-footer {
   text-align: center;
