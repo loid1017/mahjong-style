@@ -996,6 +996,30 @@ body {
   border: 1px solid rgba(192,57,43,0.3);
 }
 
+/* ── Type Detail Players ── */
+.type-detail-players {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.type-detail-players-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.type-player-chip {
+  font-size: 11px;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 20px;
+  padding: 2px 10px;
+  background: rgba(201,168,76,0.07);
+  cursor: default;
+}
+
 /* ── Players Card ── */
 .players-card {
   background: var(--surface);

@@ -493,6 +493,12 @@ function renderTypeList() {
                 <span class="compat-tag good-tag">相性◎ ${TYPE_BY_ID[t.good].icon} ${TYPE_BY_ID[t.good].name}</span>
                 <span class="compat-tag bad-tag">苦手 ${TYPE_BY_ID[t.bad].icon} ${TYPE_BY_ID[t.bad].name}</span>
               </div>
+              <div class="type-detail-players">
+                <span class="detail-label">🀄 似たスタイルのプロ</span>
+                <div class="type-detail-players-list">
+                  ${t.players.map(p => `<span class="type-player-chip" title="${p.note}">${p.name}</span>`).join('')}
+                </div>
+              </div>
             </div>
           </div>
         `).join('')}
