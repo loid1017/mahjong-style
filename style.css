@@ -567,7 +567,7 @@ body {
 
 .choice-btn:hover {
   border-color: var(--gold);
-  background: #2a2318;
+  background: var(--surface);
   transform: translateX(3px);
 }
 
@@ -575,7 +575,7 @@ body {
 
 .choice-btn.selected {
   border-color: var(--gold);
-  background: #2a2318;
+  background: var(--surface);
 }
 
 .choice-btn.selected::before { transform: scaleY(1); }
@@ -758,7 +758,7 @@ body {
 .compat-item .name { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
 .compat-item .tag { font-size: 10px; color: var(--text-muted); }
 .compat-item.good { border-color: var(--gold); }
-.compat-item.bad { border-color: #5a2a2a; }
+.compat-item.bad { border-color: rgba(192,57,43,0.5); }
 
 /* Retry button */
 .btn-retry {
@@ -992,7 +992,7 @@ body {
 
 .bad-tag {
   background: rgba(192,57,43,0.1);
-  color: #c0392b;
+  color: rgba(192,57,43,0.9);
   border: 1px solid rgba(192,57,43,0.3);
 }
 
