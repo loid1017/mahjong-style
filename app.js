@@ -618,6 +618,14 @@ async function renderStart() {
       <h1><span class="h1-sub">ロイド式</span><br>麻雀スタイル診断</h1>
       <p>自分の麻雀スタイル、意外と知らないもの。<br>12問でチェックして、強くなるヒントまでもらっちゃおう🀄</p>
       <button class="btn-start" onclick="startQuiz()">診断スタート</button>
+      ${(() => {
+        try {
+          const last = JSON.parse(localStorage.getItem('lastResult') || 'null');
+          if (!last || !TYPE_BY_ID[last.typeId]) return '';
+          const t = TYPE_BY_ID[last.typeId];
+          return `<button class="btn-last-result" onclick="showLastResult()">${t.icon} 前回の結果を見る <span class="btn-last-name">${t.name}</span></button>`;
+        } catch(e) { return ''; }
+      })()}
       <div class="ornament">── ◆ ──</div>
     </div>
     <div id="stats-section" class="stats-section">
@@ -659,6 +667,14 @@ async function renderStart() {
 
 let currentQ = 0;
 let answers = [];
+
+function showLastResult() {
+  try {
+    const last = JSON.parse(localStorage.getItem('lastResult') || 'null');
+    if (!last || !TYPE_BY_ID[last.typeId]) return;
+    renderResult(TYPE_BY_ID[last.typeId], last.scores);
+  } catch(e) {}
+}
 
 function startQuiz() {
   currentQ = 0;
@@ -739,6 +755,9 @@ function showLoading() {
 
 async function renderResult(type, scores) {
   saveResult(type.id);
+  try {
+    localStorage.setItem('lastResult', JSON.stringify({ typeId: type.id, scores }));
+  } catch(e) {};
   const goodType = TYPE_BY_ID[type.good];
   const badType = TYPE_BY_ID[type.bad];
   const axes = Object.keys(AXIS_LABELS);
@@ -855,6 +874,7 @@ function initThemeSwitcher() {
 
 // ── 初期化 ──────────────────────────────────────────────────────────────────
 window.startQuiz = startQuiz;
+window.showLastResult = showLastResult;
 window.goBack = goBack;
 window.renderStart = renderStart;
 window.selectChoice = selectChoice;

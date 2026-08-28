@@ -777,6 +777,37 @@ body {
 
 .btn-retry:hover { background: rgba(201,168,76,0.1); }
 
+.btn-last-result {
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: var(--radius);
+  padding: 10px 20px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-last-result:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(201,168,76,0.06);
+}
+
+.btn-last-name {
+  font-size: 12px;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
 /* Axis legend */
 .axis-legend {
   display: flex;
