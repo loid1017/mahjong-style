@@ -14,9 +14,33 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 
+function getSessionId() {
+  let sid = sessionStorage.getItem('sid');
+  if (!sid) {
+    sid = Math.random().toString(36).slice(2) + Date.now().toString(36);
+    sessionStorage.setItem('sid', sid);
+  }
+  return sid;
+}
+
 async function saveResult(typeName) {
   try {
-    await addDoc(collection(db, "results"), { type: typeName, ts: Date.now() });
+    const ua = navigator.userAgent;
+    const isMobile = /iPhone|Android|iPad/.test(ua);
+    const isIOS = /iPhone|iPad/.test(ua);
+    const isAndroid = /Android/.test(ua);
+    const browserMatch = ua.match(/(Chrome|Safari|Firefox|Edge|OPR)\/[\d.]+/g) || [];
+    await addDoc(collection(db, "results"), {
+      type: typeName,
+      ts: Date.now(),
+      sid: getSessionId(),
+      screen: `${screen.width}x${screen.height}`,
+      lang: navigator.language || '',
+      tz: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+      referrer: document.referrer || '',
+      device: isMobile ? (isIOS ? 'iOS' : isAndroid ? 'Android' : 'mobile') : 'desktop',
+      browser: browserMatch.join(' ').slice(0, 80),
+    });
   } catch(e) { console.warn("Firebase save failed", e); }
 }
 
