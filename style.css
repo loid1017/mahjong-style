@@ -1008,6 +1008,14 @@ body {
 
 .footer-sep { margin: 0 6px; }
 
+.footer-version {
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--text-muted);
+  opacity: 0.5;
+  line-height: 1.6;
+}
+
 /* ── Stats Section ── */
 .stats-section {
   margin: 24px 0 8px;

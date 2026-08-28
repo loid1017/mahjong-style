@@ -574,6 +574,7 @@ async function renderStart() {
       <span>made by ロイド</span>
       <span class="footer-sep">｜</span>
       <span>created on 2026/8/28</span>
+      <div class="footer-version">Version 1.1 · Created on 2026/8/29 by ロイド<br>修正内容：診断ロジックの偏りを修正</div>
     </div>
   `;
 
