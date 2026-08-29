@@ -1005,6 +1005,39 @@ body {
 }
 
 /* ── Players Card ── */
+.mental-card {
+  background: linear-gradient(135deg, rgba(100,60,180,0.12), rgba(60,100,200,0.08));
+  border: 1px solid rgba(140,100,220,0.35);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.mental-card-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.mental-card-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.mental-icon { font-size: 32px; line-height: 1; }
+.mental-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.05em;
+}
+.mental-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
 .players-card {
   background: var(--surface);
   border: 1px solid rgba(201,168,76,0.25);

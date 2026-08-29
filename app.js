@@ -167,6 +167,61 @@ const QUESTIONS = [
       { text: "直感と感性で誰も真似できない麻雀をしたい", axes: { intuition: 3, gamble: 1 } },
     ]
   },
+  // ── メンタル質問 ──
+  {
+    text: "放銃（振り込み）した直後、次の局のあなたは？",
+    choices: [
+      { text: "すぐ気持ちを切り替えて、何事もなかったように打つ", mental: { resilience: 3 } },
+      { text: "「取り返すぞ」と逆に燃えてくる", mental: { passion: 3 } },
+      { text: "少し引きずるが、数局で戻れる", mental: { adaptive: 2, tilt: 1 } },
+      { text: "かなり引きずって、しばらく手が鈍る", mental: { tilt: 3 } },
+    ]
+  },
+  {
+    text: "大事な半荘の開局前、あなたの心境は？",
+    choices: [
+      { text: "特に何も感じない。いつも通り打つだけ", mental: { resilience: 3 } },
+      { text: "緊張するが、それが集中力に変わる", mental: { pressure: 2, passion: 1 } },
+      { text: "少しドキドキするが楽しみの方が大きい", mental: { adaptive: 2, passion: 1 } },
+      { text: "緊張で手が震えることもある", mental: { pressure: 3 } },
+    ]
+  },
+  {
+    text: "ツかない時間が続いている。どう対処する？",
+    choices: [
+      { text: "「確率の偏りだ」と論理で割り切る", mental: { resilience: 2, tilt: -1 } },
+      { text: "「ここを乗り越えれば来る」と信じて耐える", mental: { passion: 2, adaptive: 1 } },
+      { text: "打ち方を少し変えてみる", mental: { adaptive: 3 } },
+      { text: "気持ちが沈んで打牌が雑になってしまう", mental: { tilt: 3 } },
+    ]
+  },
+  {
+    text: "オーラス、逆転されてラス確定が見えてきた。心境は？",
+    choices: [
+      { text: "「負けは負け」と冷静に受け入れる", mental: { resilience: 3 } },
+      { text: "最後まで諦めず逆転の一手を探す", mental: { passion: 3 } },
+      { text: "悔しいが、次のゲームへの糧にしようと思う", mental: { adaptive: 3 } },
+      { text: "悔しさで頭が真っ白になる", mental: { tilt: 2, pressure: 1 } },
+    ]
+  },
+  {
+    text: "相手にアガられ続けて全然アガれない。どう感じる？",
+    choices: [
+      { text: "「順番が来るまで待てばいい」と気にしない", mental: { resilience: 3 } },
+      { text: "「絶対次は取る」と闘志が湧いてくる", mental: { passion: 3 } },
+      { text: "焦りつつも冷静さを保とうと意識する", mental: { adaptive: 2, pressure: 1 } },
+      { text: "じわじわと焦りが積み重なって判断が鈍る", mental: { tilt: 2, pressure: 2 } },
+    ]
+  },
+  {
+    text: "自分のミスで負けたとき、試合後の行動は？",
+    choices: [
+      { text: "すぐ頭から消して次の準備をする", mental: { resilience: 3 } },
+      { text: "ミスを徹底的に振り返って次に活かす", mental: { adaptive: 3 } },
+      { text: "悔しくて、しばらくミスを引きずる", mental: { tilt: 2, pressure: 1 } },
+      { text: "悔しさをバネにもっと練習しようと燃える", mental: { passion: 3 } },
+    ]
+  },
 ];
 
 // 12タイプ定義
@@ -366,6 +421,69 @@ const TYPES = [
 ];
 
 const TYPE_BY_ID = Object.fromEntries(TYPES.map(t => [t.id, t]));
+
+// ── メンタルタイプ定義 ──────────────────────────────────────────────────────
+const MENTAL_TYPES = [
+  {
+    id: "iron",
+    icon: "🧱",
+    name: "鉄壁メンタル",
+    desc: "振り込んでも動じない。どんな局面も平常心を保てる安定型。長期戦で真価を発揮する。",
+    axes: { resilience: 5, tilt: 0, pressure: 1, adaptive: 3, passion: 2 },
+  },
+  {
+    id: "wave",
+    icon: "🌊",
+    name: "波乱万丈型",
+    desc: "感情の波が激しく、乗ってるときは最強。ただし崩れると立て直しに時間がかかる。",
+    axes: { resilience: 1, tilt: 4, pressure: 2, adaptive: 2, passion: 3 },
+  },
+  {
+    id: "ice",
+    icon: "🧊",
+    name: "冷静分析型",
+    desc: "感情より論理。ミスをデータとして処理し、淡々と立て直す。動揺が表に出にくい。",
+    axes: { resilience: 3, tilt: 0, pressure: 1, adaptive: 4, passion: 1 },
+  },
+  {
+    id: "fire",
+    icon: "🔥",
+    name: "闘志燃焼型",
+    desc: "ピンチほど燃える。逆境で真価を発揮する逆転の申し子。劣勢こそが本番。",
+    axes: { resilience: 2, tilt: 1, pressure: 2, adaptive: 2, passion: 5 },
+  },
+  {
+    id: "reed",
+    icon: "🌀",
+    name: "揺れる葦型",
+    desc: "繊細で周囲の影響を受けやすい。ただし環境適応力が高く、仲間の存在で力を発揮する。",
+    axes: { resilience: 1, tilt: 3, pressure: 4, adaptive: 4, passion: 2 },
+  },
+];
+
+function calcMentalScores(answers) {
+  const s = { resilience: 0, tilt: 0, pressure: 0, adaptive: 0, passion: 0 };
+  for (const a of answers) {
+    if (!a.mental) continue;
+    for (const [k, v] of Object.entries(a.mental)) {
+      s[k] = (s[k] || 0) + v;
+    }
+  }
+  return s;
+}
+
+function findMentalType(mentalScores) {
+  let best = null, bestDist = Infinity;
+  for (const mt of MENTAL_TYPES) {
+    let dist = 0;
+    for (const k of Object.keys(mentalScores)) {
+      const diff = (mentalScores[k] || 0) - (mt.axes[k] || 0);
+      dist += diff * diff;
+    }
+    if (dist < bestDist) { bestDist = dist; best = mt; }
+  }
+  return best;
+}
 
 const AXIS_LABELS = {
   attack: "攻撃",
@@ -697,7 +815,8 @@ function showLastResult() {
   try {
     const last = JSON.parse(localStorage.getItem('lastResult') || 'null');
     if (!last || !TYPE_BY_ID[last.typeId]) return;
-    renderResult(TYPE_BY_ID[last.typeId], last.scores);
+    const mentalType = last.mentalTypeId ? MENTAL_TYPES.find(m => m.id === last.mentalTypeId) : null;
+    renderResult(TYPE_BY_ID[last.typeId], last.scores, mentalType);
   } catch(e) {}
 }
 
@@ -774,14 +893,16 @@ function showLoading() {
   setTimeout(() => {
     const scores = calcScores(answers);
     const type = findType(scores);
-    renderResult(type, scores);
+    const mentalScores = calcMentalScores(answers);
+    const mentalType = findMentalType(mentalScores);
+    renderResult(type, scores, mentalType);
   }, 1800);
 }
 
-async function renderResult(type, scores) {
+async function renderResult(type, scores, mentalType) {
   saveResult(type.id);
   try {
-    localStorage.setItem('lastResult', JSON.stringify({ typeId: type.id, scores }));
+    localStorage.setItem('lastResult', JSON.stringify({ typeId: type.id, scores, mentalTypeId: mentalType?.id }));
   } catch(e) {};
   const goodType = TYPE_BY_ID[type.good];
   const badType = TYPE_BY_ID[type.bad];
@@ -844,6 +965,16 @@ async function renderResult(type, scores) {
           </div>
         </div>
       </div>
+
+      ${mentalType ? `
+      <div class="mental-card">
+        <div class="mental-card-label">🧠 メンタルタイプ診断</div>
+        <div class="mental-card-main">
+          <span class="mental-icon">${mentalType.icon}</span>
+          <span class="mental-name">${mentalType.name}</span>
+        </div>
+        <div class="mental-desc">${mentalType.desc}</div>
+      </div>` : ''}
 
       <div class="players-card">
         <h3>🀄 似たスタイルのプロ雀士</h3>
