@@ -1012,6 +1012,15 @@ body {
   padding: 20px;
   margin-bottom: 16px;
 }
+.ranking-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
 .ranking-title {
   font-size: 13px;
   font-weight: 700;

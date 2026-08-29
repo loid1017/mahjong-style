@@ -993,7 +993,8 @@ async function renderResult(type, scores, mentalType, ranked) {
       </div>
 
       <div class="ranking-card">
-        <div class="ranking-title">📊 あなたのタイプ適合ランキング</div>
+        <div class="ranking-title">🎴 あなたの隠れた素質ランキング</div>
+        <div class="ranking-desc">あなたの回答が各タイプにどれだけ近いかを示しています。1位が今回の診断結果ですが、上位に近いタイプほど「もう一つの自分」として眠っている可能性があります。</div>
         <div class="ranking-list">
           ${ranked.map((r, i) => {
             const maxDist = ranked[ranked.length - 1].dist || 1;
