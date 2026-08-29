@@ -932,8 +932,8 @@ function showLoading() {
     const scores = calcScores(answers);
     const ranked = rankTypes(scores);
     const type = ranked[0].type;
-    const mentalScores = calcMentalScores(answers);
-    const mentalType = findMentalType(mentalScores);
+    const hasMental = answers.some(a => a.mental);
+    const mentalType = hasMental ? findMentalType(calcMentalScores(answers)) : null;
     renderResult(type, scores, mentalType, ranked);
   }, 1800);
 }
