@@ -549,42 +549,93 @@ async function renderStart() {
   app.innerHTML = `
     <div class="screen-start">
       <div class="hero-visual">
-        <div class="hero-orbit hero-orbit--1">
-          <div class="orbit-dot orbit-dot--1"></div>
-          <div class="orbit-dot orbit-dot--2"></div>
-          <div class="orbit-dot orbit-dot--3"></div>
+        <div class="hero-bg-ring"></div>
+        <div class="hero-bg-ring hero-bg-ring--2"></div>
+        <div class="hero-orb-ring">
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
         </div>
-        <div class="hero-orbit hero-orbit--2">
-          <div class="orbit-dot orbit-dot--4"></div>
-          <div class="orbit-dot orbit-dot--5"></div>
+        <div class="hero-sparks">
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
         </div>
-        <div class="hero-orbit hero-orbit--3">
-          <div class="orbit-dot orbit-dot--6"></div>
-        </div>
-        <div class="hero-tile-wrap">
-          <div class="hero-tile-3d">
-            <div class="tile-face tile-face--front">
-              <svg viewBox="0 0 56 76" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="tgF" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#f5edd8"/></linearGradient>
-                  <filter id="glowF"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                </defs>
-                <rect x="1.5" y="1.5" width="53" height="73" rx="6" fill="url(#tgF)" stroke="#d4a84c" stroke-width="2"/>
-                <rect x="4.5" y="4.5" width="47" height="67" rx="4" fill="none" stroke="#e8c96a" stroke-width="1" opacity="0.7"/>
-                <text x="28" y="53" text-anchor="middle" font-size="38" font-family="serif" fill="#c0392b" font-weight="bold" filter="url(#glowF)">中</text>
-              </svg>
-            </div>
-            <div class="tile-face tile-face--back">
-              <svg viewBox="0 0 56 76" xmlns="http://www.w3.org/2000/svg">
-                <defs><linearGradient id="tgB" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2a1f10"/><stop offset="100%" stop-color="#1a1208"/></linearGradient></defs>
-                <rect x="1.5" y="1.5" width="53" height="73" rx="6" fill="url(#tgB)" stroke="#c9a84c" stroke-width="1.5"/>
-                <rect x="6" y="6" width="44" height="64" rx="3" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
-                <text x="28" y="46" text-anchor="middle" font-size="22" font-family="serif" fill="rgba(201,168,76,0.6)">🀄</text>
-              </svg>
-            </div>
+        <div class="hero-fan">
+          <!-- 白（左端） -->
+          <div class="fan-tile fan-tile--p1">
+            <svg viewBox="0 0 56 76" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="tg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fdfaf3"/><stop offset="100%" stop-color="#f0e8d0"/></linearGradient></defs>
+              <rect x="1.5" y="1.5" width="53" height="73" rx="5" fill="url(#tg1)" stroke="#c8b98a" stroke-width="1.2"/>
+              <rect x="6" y="6" width="44" height="64" rx="3" fill="none" stroke="#d4c8a0" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <!-- 北 -->
+          <div class="fan-tile fan-tile--p2">
+            <svg viewBox="0 0 56 76" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="tg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fdfaf3"/><stop offset="100%" stop-color="#f0e8d0"/></linearGradient></defs>
+              <rect x="1.5" y="1.5" width="53" height="73" rx="5" fill="url(#tg2)" stroke="#c8b98a" stroke-width="1.2"/>
+              <rect x="4" y="4" width="48" height="68" rx="3.5" fill="none" stroke="#e2d4b0" stroke-width="0.7" opacity="0.5"/>
+              <text x="28" y="52" text-anchor="middle" font-size="32" font-family="serif" fill="#1a3a6a" font-weight="bold">北</text>
+            </svg>
+          </div>
+          <!-- 西 -->
+          <div class="fan-tile fan-tile--p3">
+            <svg viewBox="0 0 56 76" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="tg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fdfaf3"/><stop offset="100%" stop-color="#f0e8d0"/></linearGradient></defs>
+              <rect x="1.5" y="1.5" width="53" height="73" rx="5" fill="url(#tg3)" stroke="#c8b98a" stroke-width="1.2"/>
+              <rect x="4" y="4" width="48" height="68" rx="3.5" fill="none" stroke="#e2d4b0" stroke-width="0.7" opacity="0.5"/>
+              <text x="28" y="52" text-anchor="middle" font-size="32" font-family="serif" fill="#1a3a6a" font-weight="bold">西</text>
+            </svg>
+          </div>
+          <!-- 發 -->
+          <div class="fan-tile fan-tile--p4">
+            <svg viewBox="0 0 56 76" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="tg4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fdfaf3"/><stop offset="100%" stop-color="#f0e8d0"/></linearGradient></defs>
+              <rect x="1.5" y="1.5" width="53" height="73" rx="5" fill="url(#tg4)" stroke="#c8b98a" stroke-width="1.2"/>
+              <rect x="4" y="4" width="48" height="68" rx="3.5" fill="none" stroke="#e2d4b0" stroke-width="0.7" opacity="0.5"/>
+              <text x="28" y="52" text-anchor="middle" font-size="34" font-family="serif" fill="#1a7a1a" font-weight="bold">發</text>
+            </svg>
+          </div>
+          <!-- 中（センター） -->
+          <div class="fan-tile fan-tile--center">
+            <svg viewBox="0 0 56 76" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="tgC" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#f5edd8"/></linearGradient>
+                <filter id="glowC"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <rect x="1.5" y="1.5" width="53" height="73" rx="5" fill="url(#tgC)" stroke="#d4a84c" stroke-width="1.8"/>
+              <rect x="4" y="4" width="48" height="68" rx="3.5" fill="none" stroke="#e8c96a" stroke-width="1" opacity="0.6"/>
+              <text x="28" y="53" text-anchor="middle" font-size="36" font-family="serif" fill="#c0392b" font-weight="bold" filter="url(#glowC)">中</text>
+            </svg>
+          </div>
+          <!-- 東 -->
+          <div class="fan-tile fan-tile--p5">
+            <svg viewBox="0 0 56 76" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="tg5" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fdfaf3"/><stop offset="100%" stop-color="#f0e8d0"/></linearGradient></defs>
+              <rect x="1.5" y="1.5" width="53" height="73" rx="5" fill="url(#tg5)" stroke="#c8b98a" stroke-width="1.2"/>
+              <rect x="4" y="4" width="48" height="68" rx="3.5" fill="none" stroke="#e2d4b0" stroke-width="0.7" opacity="0.5"/>
+              <text x="28" y="52" text-anchor="middle" font-size="32" font-family="serif" fill="#1a3a6a" font-weight="bold">東</text>
+            </svg>
+          </div>
+          <!-- 南 -->
+          <div class="fan-tile fan-tile--p6">
+            <svg viewBox="0 0 56 76" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="tg6" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fdfaf3"/><stop offset="100%" stop-color="#f0e8d0"/></linearGradient></defs>
+              <rect x="1.5" y="1.5" width="53" height="73" rx="5" fill="url(#tg6)" stroke="#c8b98a" stroke-width="1.2"/>
+              <rect x="4" y="4" width="48" height="68" rx="3.5" fill="none" stroke="#e2d4b0" stroke-width="0.7" opacity="0.5"/>
+              <text x="28" y="52" text-anchor="middle" font-size="32" font-family="serif" fill="#1a3a6a" font-weight="bold">南</text>
+            </svg>
+          </div>
+          <!-- 白（右端） -->
+          <div class="fan-tile fan-tile--p7">
+            <svg viewBox="0 0 56 76" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="tg7" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fdfaf3"/><stop offset="100%" stop-color="#f0e8d0"/></linearGradient></defs>
+              <rect x="1.5" y="1.5" width="53" height="73" rx="5" fill="url(#tg7)" stroke="#c8b98a" stroke-width="1.2"/>
+              <rect x="6" y="6" width="44" height="64" rx="3" fill="none" stroke="#d4c8a0" stroke-width="1.2"/>
+            </svg>
           </div>
         </div>
-        <div class="hero-glow-ring"></div>
         <div class="hero-floor-glow"></div>
       </div>
       <div class="ornament">── ◆ ──</div>
