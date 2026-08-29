@@ -887,12 +887,34 @@ function selectChoice(idx) {
 
   setTimeout(() => {
     currentQ++;
-    if (currentQ < QUESTIONS.length) {
+    if (currentQ === 12) {
+      showMentalPrompt();
+    } else if (currentQ < QUESTIONS.length) {
       renderQuestion();
     } else {
       showLoading();
     }
   }, 300);
+}
+
+function showMentalPrompt() {
+  window.scrollTo(0, 0);
+  app.innerHTML = `
+    <div class="screen-mental-prompt">
+      <div class="mental-prompt-icon">🧠</div>
+      <div class="mental-prompt-title">麻雀スタイル診断、完了！</div>
+      <div class="mental-prompt-sub">さらに精度を上げる<br><strong>メンタル診断</strong>（追加6問）を受けますか？</div>
+      <div class="mental-prompt-desc">あなたのメンタルタイプ（5種類）が診断され、<br>結果画面に表示されます。</div>
+      <div class="mental-prompt-btns">
+        <button class="btn-mental-yes" onclick="startMentalQuiz()">🔥 やってみる（+6問）</button>
+        <button class="btn-mental-no" onclick="showLoading()">このまま結果を見る</button>
+      </div>
+    </div>
+  `;
+}
+
+function startMentalQuiz() {
+  renderQuestion();
 }
 
 function showLoading() {
@@ -1074,6 +1096,8 @@ window.startQuiz = startQuiz;
 window.showLastResult = showLastResult;
 window.shareToX = shareToX;
 window.loadStats = loadStats;
+window.startMentalQuiz = startMentalQuiz;
+window.showLoading = showLoading;
 window.goBack = goBack;
 window.renderStart = renderStart;
 window.selectChoice = selectChoice;

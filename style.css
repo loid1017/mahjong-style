@@ -1052,6 +1052,67 @@ body {
 .ranking-item.ranking-top .ranking-bar-fill { background: var(--gold); }
 .ranking-pct { font-size: 11px; color: var(--text-muted); min-width: 32px; text-align: right; }
 
+.screen-mental-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 48px 24px;
+  gap: 16px;
+}
+.mental-prompt-icon { font-size: 56px; line-height: 1; margin-bottom: 4px; }
+.mental-prompt-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+.mental-prompt-sub {
+  font-size: 16px;
+  color: var(--text);
+  line-height: 1.8;
+}
+.mental-prompt-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.mental-prompt-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+}
+.btn-mental-yes {
+  background: var(--gold);
+  color: #1a1209;
+  border: none;
+  border-radius: var(--radius);
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: opacity 0.15s;
+}
+.btn-mental-yes:hover { opacity: 0.85; }
+.btn-mental-no {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.btn-mental-no:hover { border-color: var(--text-muted); color: var(--text); }
+
 .mental-card {
   background: linear-gradient(135deg, rgba(100,60,180,0.12), rgba(60,100,200,0.08));
   border: 1px solid rgba(140,100,220,0.35);
