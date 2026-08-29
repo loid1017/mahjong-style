@@ -119,92 +119,56 @@ body {
   isolation: auto;
 }
 
-/* ── 水墨筆跡SVG ── */
-.hero-ink {
+/* ── アイコンリング ── */
+.hero-icon-ring {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 260px;
-  height: 260px;
-  transform: translate(-50%, -58%);
+  width: 220px;
+  height: 220px;
+  margin: -110px 0 0 -110px;
+  animation: icon-ring-spin 25s linear infinite;
   pointer-events: none;
   z-index: 1;
-  overflow: visible;
 }
 
-/* 外弧：ゆっくり描かれて消え、少し間を置いてまた描かれる */
-.ink-arc {
-  stroke-dasharray: 38 62;        /* 38%描画 62%空白 */
-  stroke-dashoffset: 0;
-  transform-origin: 130px 130px;
+@keyframes icon-ring-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
-.ink-arc--1 {
-  stroke-dasharray: 42 58;
-  animation: ink-draw 7s cubic-bezier(0.4,0,0.2,1) infinite,
-             ink-rotate-1 14s linear infinite;
-  opacity: 0.9;
-}
-
-.ink-arc--2 {
-  stroke-dasharray: 30 70;
-  animation: ink-draw 9s cubic-bezier(0.4,0,0.2,1) infinite 1.5s,
-             ink-rotate-2 18s linear infinite reverse;
+.icon-ring-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 20px;
+  line-height: 1;
+  /* 各アイテムを円周上に配置 (--i: 0〜11) */
+  transform:
+    rotate(calc(var(--i) * 30deg))
+    translateY(-110px)
+    rotate(calc(var(--i) * -30deg));   /* 文字を正立させる */
+  margin: -12px 0 0 -12px;
   opacity: 0.75;
+  animation: icon-wave calc(2.5s + var(--i) * 0.18s) ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.35s);
 }
 
-.ink-arc--3 {
-  stroke-dasharray: 22 78;
-  animation: ink-draw 11s cubic-bezier(0.4,0,0.2,1) infinite 3s,
-             ink-rotate-3 22s linear infinite;
-  opacity: 0.6;
-}
-
-@keyframes ink-draw {
-  0%   { stroke-dashoffset: 100; opacity: 0; }
-  8%   { opacity: 1; }
-  45%  { stroke-dashoffset: 0; opacity: 1; }
-  75%  { stroke-dashoffset: -30; opacity: 0.5; }
-  90%  { stroke-dashoffset: -60; opacity: 0; }
-  100% { stroke-dashoffset: -60; opacity: 0; }
-}
-
-@keyframes ink-rotate-1 {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-@keyframes ink-rotate-2 {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-@keyframes ink-rotate-3 {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-/* 筆先の光点 */
-.ink-dot {
-  transform-origin: 130px 130px;
-  filter: blur(0.5px);
-}
-
-.ink-dot--1 {
-  animation: ink-rotate-1 14s linear infinite, dot-pulse 7s ease-in-out infinite;
-  box-shadow: 0 0 6px rgba(232,201,106,0.9);
-}
-.ink-dot--2 {
-  animation: ink-rotate-2 18s linear infinite reverse, dot-pulse 9s ease-in-out infinite 1.5s;
-  opacity: 0.8;
-}
-.ink-dot--3 {
-  animation: ink-rotate-3 22s linear infinite, dot-pulse 11s ease-in-out infinite 3s;
-  opacity: 0.6;
-}
-
-@keyframes dot-pulse {
-  0%, 100% { opacity: 0.3; r: 2; }
-  45%       { opacity: 1;   r: 4; }
-  90%       { opacity: 0;   r: 1; }
+@keyframes icon-wave {
+  0%, 100% { transform:
+    rotate(calc(var(--i) * 30deg))
+    translateY(-110px)
+    rotate(calc(var(--i) * -30deg))
+    translateY(0px) scale(1);
+    opacity: 0.65;
+  }
+  50% { transform:
+    rotate(calc(var(--i) * 30deg))
+    translateY(-110px)
+    rotate(calc(var(--i) * -30deg))
+    translateY(-7px) scale(1.15);
+    opacity: 1;
+  }
 }
 
 /* 扇形牌（8枚） */
