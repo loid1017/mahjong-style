@@ -501,7 +501,8 @@ const AXIS_LABELS = {
 function calcScores(answers) {
   const scores = { attack: 0, highScore: 0, gamble: 0, speed: 0, defense: 0, logic: 0, intuition: 0, flexible: 0 };
   for (const a of answers) {
-    for (const [axis, val] of Object.entries(a)) {
+    if (!a.axes) continue;
+    for (const [axis, val] of Object.entries(a.axes)) {
       scores[axis] = (scores[axis] || 0) + val;
     }
   }
@@ -879,8 +880,7 @@ function goBack() {
 }
 
 function selectChoice(idx) {
-  const axes = QUESTIONS[currentQ].choices[idx].axes;
-  answers.push(axes);
+  answers.push(QUESTIONS[currentQ].choices[idx]);
 
   const btns = document.querySelectorAll('.choice-btn');
   btns[idx].classList.add('selected');
