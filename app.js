@@ -918,7 +918,6 @@ function showLoading() {
 
 async function renderResult(type, scores, mentalType, ranked) {
   if (!ranked) ranked = rankTypes(scores);
-  saveResult(type.id);
   try {
     localStorage.setItem('lastResult', JSON.stringify({ typeId: type.id, scores, mentalTypeId: mentalType?.id }));
   } catch(e) {};
@@ -1035,6 +1034,8 @@ async function renderResult(type, scores, mentalType, ranked) {
   requestAnimationFrame(() => {
     const canvas = document.getElementById('radarCanvas');
     if (canvas) drawRadar(canvas, scores);
+    // 描画完了後にFirestore書き込み（画面表示をブロックしない）
+    saveResult(type.id);
   });
 }
 
@@ -1078,6 +1079,8 @@ window.renderStart = renderStart;
 window.selectChoice = selectChoice;
 window.toggleTypeDetail = toggleTypeDetail;
 renderStart();
+// Firestoreの初期接続をバックグラウンドでウォームアップ（結果画面での遅延防止）
+fetchStats().catch(() => {});
 document.addEventListener('DOMContentLoaded', initThemeSwitcher);
 // DOMがすでに読み込み済みの場合にも対応
 if (document.readyState !== 'loading') initThemeSwitcher();
