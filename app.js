@@ -795,9 +795,11 @@ function loadStats() {
           <div class="stats-title">みんなの診断結果ランキング</div>
           <div class="stats-total">これまで ${total} 人が診断</div>
         </div>
-        <button class="btn-stats-refresh" onclick="loadStats()">🔄 更新</button>
+        <div class="stats-refresh-wrap">
+          <button class="btn-stats-refresh" onclick="loadStats()">🔄 更新</button>
+          <div class="stats-updated">${now} 時点</div>
+        </div>
       </div>
-      <div class="stats-updated">${now} 時点</div>
       <div class="stats-bars">
         ${sorted.map(([id, cnt], i) => {
           const t = TYPE_BY_ID[id];

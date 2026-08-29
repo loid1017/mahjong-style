@@ -1186,6 +1186,13 @@ body {
   margin-bottom: 0;
 }
 
+.stats-refresh-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
 .stats-updated {
   font-size: 10px;
   color: var(--text-muted);
