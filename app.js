@@ -550,7 +550,11 @@ async function renderStart() {
     <div class="screen-start">
       <div class="hero-visual">
         <div class="hero-icon-ring">
-          ${['⚔️','🛡️','⚡','🧮','🌙','🌊','🔨','🎭','👁️','🔥','🌌','🃏'].map((icon, i) => `<span class="icon-ring-item" style="--i:${i}">${icon}</span>`).join('')}
+          ${['⚔️','🛡️','⚡','🧮','🌙','🌊','🔨','🎭','👁️','🔥','🌌','🃏'].map((icon, i) => `
+            <span class="icon-ring-item" style="--i:${i};--dur:${(2.2+i*0.31).toFixed(2)}s;--delay:${(i*-0.47).toFixed(2)}s;--amp:${(5+i%4*2)}px">
+              ${icon}
+              <span class="icon-sparkle"></span>
+            </span>`).join('')}
         </div>
         <div class="hero-fan">
           <!-- 白（左端） -->
