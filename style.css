@@ -119,151 +119,92 @@ body {
   isolation: auto;
 }
 
-/* 放射ビーム */
-.hero-visual::before {
-  content: '';
+/* ── 水墨筆跡SVG ── */
+.hero-ink {
   position: absolute;
-  top: 30%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   width: 260px;
   height: 260px;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    rgba(201,168,76,0.07) 10deg,
-    transparent 20deg,
-    rgba(201,168,76,0.05) 30deg,
-    transparent 40deg,
-    rgba(201,168,76,0.07) 55deg,
-    transparent 70deg,
-    rgba(201,168,76,0.04) 85deg,
-    transparent 100deg,
-    rgba(201,168,76,0.07) 120deg,
-    transparent 140deg,
-    rgba(201,168,76,0.05) 160deg,
-    transparent 180deg,
-    rgba(201,168,76,0.07) 200deg,
-    transparent 220deg,
-    rgba(201,168,76,0.06) 240deg,
-    transparent 260deg,
-    rgba(201,168,76,0.07) 280deg,
-    transparent 300deg,
-    rgba(201,168,76,0.05) 320deg,
-    transparent 340deg,
-    rgba(201,168,76,0.07) 360deg
-  );
-  border-radius: 50%;
-  animation: beam-spin 18s linear infinite;
+  transform: translate(-50%, -58%);
   pointer-events: none;
-  z-index: 0;
-}
-
-@keyframes beam-spin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to   { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* 背景リング */
-.hero-bg-ring {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  width: 230px;
-  height: 230px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  border: 1px solid rgba(201,168,76,0.18);
-  background: radial-gradient(ellipse at center,
-    rgba(201,168,76,0.15) 0%,
-    rgba(201,168,76,0.07) 45%,
-    transparent 70%);
-  animation: ring-pulse 3s ease-in-out infinite;
-  z-index: 0;
-}
-
-.hero-bg-ring--2 {
-  width: 170px;
-  height: 170px;
-  top: 35%;
-  border: 1px solid rgba(201,168,76,0.28);
-  background: radial-gradient(ellipse at center,
-    rgba(201,168,76,0.25) 0%,
-    transparent 65%);
-  animation: ring-pulse 2.5s ease-in-out infinite reverse;
-}
-
-@keyframes ring-pulse {
-  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.07); }
-}
-
-/* 回転オーブ */
-.hero-orb-ring {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  width: 200px;
-  height: 200px;
-  transform: translate(-50%, -50%);
-  animation: orb-spin 5s linear infinite;
   z-index: 1;
-  pointer-events: none;
+  overflow: visible;
 }
 
-.hero-orb-ring span {
-  position: absolute;
-  border-radius: 50%;
-  background: var(--gold-light);
-  box-shadow: 0 0 6px 2px rgba(232,201,106,0.8);
+/* 外弧：ゆっくり描かれて消え、少し間を置いてまた描かれる */
+.ink-arc {
+  stroke-dasharray: 38 62;        /* 38%描画 62%空白 */
+  stroke-dashoffset: 0;
+  transform-origin: 130px 130px;
 }
 
-.hero-orb-ring span:nth-child(1) { width: 7px; height: 7px; top: 0; left: 50%; margin-left: -3.5px; }
-.hero-orb-ring span:nth-child(2) { width: 5px; height: 5px; top: 14%; right: 3%; opacity: 0.8; }
-.hero-orb-ring span:nth-child(3) { width: 4px; height: 4px; bottom: 14%; right: 3%; opacity: 0.7; }
-.hero-orb-ring span:nth-child(4) { width: 6px; height: 6px; bottom: 0; left: 50%; margin-left: -3px; opacity: 0.9; }
-.hero-orb-ring span:nth-child(5) { width: 4px; height: 4px; bottom: 14%; left: 3%; opacity: 0.7; }
-.hero-orb-ring span:nth-child(6) { width: 5px; height: 5px; top: 14%; left: 3%; opacity: 0.8; }
-
-@keyframes orb-spin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to   { transform: translate(-50%, -50%) rotate(360deg); }
+.ink-arc--1 {
+  stroke-dasharray: 42 58;
+  animation: ink-draw 7s cubic-bezier(0.4,0,0.2,1) infinite,
+             ink-rotate-1 14s linear infinite;
+  opacity: 0.9;
 }
 
-/* スパーク */
-.hero-sparks {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none;
-  z-index: 2;
+.ink-arc--2 {
+  stroke-dasharray: 30 70;
+  animation: ink-draw 9s cubic-bezier(0.4,0,0.2,1) infinite 1.5s,
+             ink-rotate-2 18s linear infinite reverse;
+  opacity: 0.75;
 }
 
-.hero-sparks span {
-  position: absolute;
-  border-radius: 50%;
-  background: var(--gold-light);
-  box-shadow: 0 0 4px rgba(232,201,106,0.9);
-  animation: spark-fly 3s ease-in-out infinite;
+.ink-arc--3 {
+  stroke-dasharray: 22 78;
+  animation: ink-draw 11s cubic-bezier(0.4,0,0.2,1) infinite 3s,
+             ink-rotate-3 22s linear infinite;
+  opacity: 0.6;
 }
 
-.hero-sparks span:nth-child(1)  { width: 4px; height: 4px; left: 28%; top: 22%; animation-delay: 0s;    animation-duration: 2.6s; }
-.hero-sparks span:nth-child(2)  { width: 3px; height: 3px; left: 72%; top: 14%; animation-delay: 0.5s;  animation-duration: 3.1s; }
-.hero-sparks span:nth-child(3)  { width: 5px; height: 5px; left: 12%; top: 48%; animation-delay: 1.0s;  animation-duration: 2.4s; }
-.hero-sparks span:nth-child(4)  { width: 3px; height: 3px; left: 88%; top: 42%; animation-delay: 1.6s;  animation-duration: 3.4s; }
-.hero-sparks span:nth-child(5)  { width: 4px; height: 4px; left: 50%; top: 8%;  animation-delay: 0.2s;  animation-duration: 2.9s; }
-.hero-sparks span:nth-child(6)  { width: 3px; height: 3px; left: 60%; top: 62%; animation-delay: 2.0s;  animation-duration: 2.7s; }
-.hero-sparks span:nth-child(7)  { width: 5px; height: 5px; left: 18%; top: 30%; animation-delay: 0.8s;  animation-duration: 3.3s; }
-.hero-sparks span:nth-child(8)  { width: 3px; height: 3px; left: 80%; top: 25%; animation-delay: 1.4s;  animation-duration: 2.5s; }
-.hero-sparks span:nth-child(9)  { width: 4px; height: 4px; left: 40%; top: 70%; animation-delay: 0.4s;  animation-duration: 3.0s; }
-.hero-sparks span:nth-child(10) { width: 3px; height: 3px; left: 65%; top: 78%; animation-delay: 1.9s;  animation-duration: 2.8s; }
-.hero-sparks span:nth-child(11) { width: 5px; height: 5px; left: 8%;  top: 70%; animation-delay: 2.4s;  animation-duration: 3.2s; }
-.hero-sparks span:nth-child(12) { width: 3px; height: 3px; left: 92%; top: 65%; animation-delay: 0.7s;  animation-duration: 2.6s; }
+@keyframes ink-draw {
+  0%   { stroke-dashoffset: 100; opacity: 0; }
+  8%   { opacity: 1; }
+  45%  { stroke-dashoffset: 0; opacity: 1; }
+  75%  { stroke-dashoffset: -30; opacity: 0.5; }
+  90%  { stroke-dashoffset: -60; opacity: 0; }
+  100% { stroke-dashoffset: -60; opacity: 0; }
+}
 
-@keyframes spark-fly {
-  0%   { transform: translateY(0)    scale(0); opacity: 0; }
-  25%  { opacity: 1; transform: translateY(-6px)  scale(1.2); }
-  70%  { opacity: 0.7; transform: translateY(-20px) scale(0.9); }
-  100% { transform: translateY(-32px) scale(0); opacity: 0; }
+@keyframes ink-rotate-1 {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes ink-rotate-2 {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes ink-rotate-3 {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* 筆先の光点 */
+.ink-dot {
+  transform-origin: 130px 130px;
+  filter: blur(0.5px);
+}
+
+.ink-dot--1 {
+  animation: ink-rotate-1 14s linear infinite, dot-pulse 7s ease-in-out infinite;
+  box-shadow: 0 0 6px rgba(232,201,106,0.9);
+}
+.ink-dot--2 {
+  animation: ink-rotate-2 18s linear infinite reverse, dot-pulse 9s ease-in-out infinite 1.5s;
+  opacity: 0.8;
+}
+.ink-dot--3 {
+  animation: ink-rotate-3 22s linear infinite, dot-pulse 11s ease-in-out infinite 3s;
+  opacity: 0.6;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 0.3; r: 2; }
+  45%       { opacity: 1;   r: 4; }
+  90%       { opacity: 0;   r: 1; }
 }
 
 /* 扇形牌（8枚） */

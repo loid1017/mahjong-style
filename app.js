@@ -549,18 +549,18 @@ async function renderStart() {
   app.innerHTML = `
     <div class="screen-start">
       <div class="hero-visual">
-        <div class="hero-bg-ring"></div>
-        <div class="hero-bg-ring hero-bg-ring--2"></div>
-        <div class="hero-orb-ring">
-          <span></span><span></span><span></span>
-          <span></span><span></span><span></span>
-        </div>
-        <div class="hero-sparks">
-          <span></span><span></span><span></span>
-          <span></span><span></span><span></span>
-          <span></span><span></span><span></span>
-          <span></span><span></span><span></span>
-        </div>
+        <svg class="hero-ink" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- 外円弧 r=118 circumference≈741 -->
+          <circle class="ink-arc ink-arc--1" cx="130" cy="130" r="118" fill="none" stroke="rgba(201,168,76,0.55)" stroke-width="1.2" stroke-linecap="round" pathLength="100"/>
+          <!-- 中円弧 r=88 circumference≈553 -->
+          <circle class="ink-arc ink-arc--2" cx="130" cy="130" r="88" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="0.9" stroke-linecap="round" pathLength="100"/>
+          <!-- 内円弧 r=60 -->
+          <circle class="ink-arc ink-arc--3" cx="130" cy="130" r="60" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="0.7" stroke-linecap="round" pathLength="100"/>
+          <!-- 筆先の光点 -->
+          <circle class="ink-dot ink-dot--1" cx="130" cy="12" r="3.5" fill="rgba(232,201,106,0.9)"/>
+          <circle class="ink-dot ink-dot--2" cx="130" cy="42" r="2.5" fill="rgba(232,201,106,0.75)"/>
+          <circle class="ink-dot ink-dot--3" cx="130" cy="70" r="2" fill="rgba(232,201,106,0.6)"/>
+        </svg>
         <div class="hero-fan">
           <!-- 白（左端） -->
           <div class="fan-tile fan-tile--p1">
