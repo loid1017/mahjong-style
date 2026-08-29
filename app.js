@@ -788,7 +788,7 @@ function loadStats() {
     const total = Object.values(counts).reduce((a, b) => a + b, 0);
     if (total === 0) { el.innerHTML = ''; return; }
     const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-    const now = new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
+    const now = new Date().toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
     el.innerHTML = `
       <div class="stats-header">
         <div>
