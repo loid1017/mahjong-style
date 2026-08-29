@@ -694,6 +694,26 @@ body {
 .compat-item.bad { border-color: rgba(192,57,43,0.5); }
 
 /* Retry button */
+.btn-share-x {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #000;
+  border: none;
+  border-radius: var(--radius);
+  padding: 14px 32px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  transition: background 0.15s, opacity 0.15s;
+}
+.btn-share-x:hover { background: #222; }
+
 .btn-retry {
   background: transparent;
   border: 1px solid var(--gold);

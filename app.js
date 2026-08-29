@@ -687,6 +687,12 @@ async function renderStart() {
 let currentQ = 0;
 let answers = [];
 
+function shareToX(typeName, typeId) {
+  const url = 'https://loid1017.github.io/mahjong-style/';
+  const text = `麻雀スタイル診断をやってみました！\n私のタイプは「${typeName}」でした🀄\n#麻雀 #麻雀好きと繋がりたい #麻雀スタイル診断`;
+  window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank');
+}
+
 function showLastResult() {
   try {
     const last = JSON.parse(localStorage.getItem('lastResult') || 'null');
@@ -851,6 +857,7 @@ async function renderResult(type, scores) {
         </div>
       </div>
 
+      <button class="btn-share-x" onclick="shareToX('${type.name}', '${type.id}')">𝕏 結果をポストする</button>
       <button class="btn-retry" onclick="renderStart()">もう一度診断する</button>
     </div>
   `;
@@ -894,6 +901,7 @@ function initThemeSwitcher() {
 // ── 初期化 ──────────────────────────────────────────────────────────────────
 window.startQuiz = startQuiz;
 window.showLastResult = showLastResult;
+window.shareToX = shareToX;
 window.goBack = goBack;
 window.renderStart = renderStart;
 window.selectChoice = selectChoice;
