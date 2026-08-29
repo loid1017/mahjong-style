@@ -782,7 +782,7 @@ async function renderStart() {
     if (!el) return;
     const total = Object.values(counts).reduce((a, b) => a + b, 0);
     if (total === 0) { el.innerHTML = ''; return; }
-    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
     el.innerHTML = `
       <div class="stats-title">みんなの診断結果ランキング</div>
       <div class="stats-total">これまで ${total} 人が診断</div>
