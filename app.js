@@ -776,16 +776,28 @@ async function renderStart() {
     </div>
   `;
 
-  // 統計を非同期で読み込んで更新
+  loadStats();
+}
+
+function loadStats() {
+  const el = document.getElementById('stats-section');
+  if (!el) return;
+  el.innerHTML = '<div class="stats-loading">統計を読み込み中…</div>';
   fetchStats().then(counts => {
-    const el = document.getElementById('stats-section');
-    if (!el) return;
+    if (!document.getElementById('stats-section')) return;
     const total = Object.values(counts).reduce((a, b) => a + b, 0);
     if (total === 0) { el.innerHTML = ''; return; }
     const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const now = new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
     el.innerHTML = `
-      <div class="stats-title">みんなの診断結果ランキング</div>
-      <div class="stats-total">これまで ${total} 人が診断</div>
+      <div class="stats-header">
+        <div>
+          <div class="stats-title">みんなの診断結果ランキング</div>
+          <div class="stats-total">これまで ${total} 人が診断</div>
+        </div>
+        <button class="btn-stats-refresh" onclick="loadStats()">🔄 更新</button>
+      </div>
+      <div class="stats-updated">${now} 時点</div>
       <div class="stats-bars">
         ${sorted.map(([id, cnt], i) => {
           const t = TYPE_BY_ID[id];
@@ -1058,6 +1070,7 @@ function initThemeSwitcher() {
 window.startQuiz = startQuiz;
 window.showLastResult = showLastResult;
 window.shareToX = shareToX;
+window.loadStats = loadStats;
 window.goBack = goBack;
 window.renderStart = renderStart;
 window.selectChoice = selectChoice;
