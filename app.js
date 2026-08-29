@@ -508,17 +508,19 @@ function calcScores(answers) {
   return scores;
 }
 
-function findType(scores) {
-  let best = null, bestDist = Infinity;
-  for (const type of TYPES) {
+function rankTypes(scores) {
+  return TYPES.map(type => {
     let dist = 0;
     for (const axis of Object.keys(scores)) {
       const diff = (scores[axis] || 0) - (type.axes[axis] || 0);
       dist += diff * diff;
     }
-    if (dist < bestDist) { bestDist = dist; best = type; }
-  }
-  return best;
+    return { type, dist };
+  }).sort((a, b) => a.dist - b.dist);
+}
+
+function findType(scores) {
+  return rankTypes(scores)[0].type;
 }
 
 // ── レーダーチャート ─────────────────────────────────────────────────────────
@@ -892,14 +894,16 @@ function showLoading() {
   `;
   setTimeout(() => {
     const scores = calcScores(answers);
-    const type = findType(scores);
+    const ranked = rankTypes(scores);
+    const type = ranked[0].type;
     const mentalScores = calcMentalScores(answers);
     const mentalType = findMentalType(mentalScores);
-    renderResult(type, scores, mentalType);
+    renderResult(type, scores, mentalType, ranked);
   }, 1800);
 }
 
-async function renderResult(type, scores, mentalType) {
+async function renderResult(type, scores, mentalType, ranked) {
+  if (!ranked) ranked = rankTypes(scores);
   saveResult(type.id);
   try {
     localStorage.setItem('lastResult', JSON.stringify({ typeId: type.id, scores, mentalTypeId: mentalType?.id }));
@@ -985,6 +989,26 @@ async function renderResult(type, scores, mentalType) {
               <span class="player-note">${p.note}</span>
             </div>
           `).join('')}
+        </div>
+      </div>
+
+      <div class="ranking-card">
+        <div class="ranking-title">📊 あなたのタイプ適合ランキング</div>
+        <div class="ranking-list">
+          ${ranked.map((r, i) => {
+            const maxDist = ranked[ranked.length - 1].dist || 1;
+            const pct = Math.round((1 - r.dist / (maxDist + 1)) * 100);
+            return `
+            <div class="ranking-item${i === 0 ? ' ranking-top' : ''}">
+              <span class="ranking-num">${i + 1}</span>
+              <span class="ranking-icon">${r.type.icon}</span>
+              <span class="ranking-name">${r.type.name}</span>
+              <div class="ranking-bar-wrap">
+                <div class="ranking-bar-fill" style="width:${pct}%"></div>
+              </div>
+              <span class="ranking-pct">${pct}%</span>
+            </div>`;
+          }).join('')}
         </div>
       </div>
 
