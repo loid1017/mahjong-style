@@ -846,11 +846,12 @@ function startQuiz() {
 
 function renderQuestion() {
   const q = QUESTIONS[currentQ];
-  const pct = (currentQ / QUESTIONS.length) * 100;
+  const totalQ = currentQ >= 12 ? 18 : 12;
+  const pct = (currentQ / totalQ) * 100;
   app.innerHTML = `
     <div class="screen-quiz">
       <div class="quiz-top">
-        <div class="progress-label">Q${currentQ + 1} / ${QUESTIONS.length}</div>
+        <div class="progress-label">Q${currentQ + 1} / ${totalQ}</div>
         ${currentQ > 0 ? `<button class="btn-back" onclick="goBack()">◀ 前の質問</button>` : '<span></span>'}
       </div>
       <div class="progress-bar-wrap">
